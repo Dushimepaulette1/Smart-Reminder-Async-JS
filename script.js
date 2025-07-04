@@ -66,3 +66,29 @@ function cancelReminder(id) {
     reminders.splice(index, 1);
   }
 }
+function throttle(fn, limit) {
+  let inThrottle;
+  return function (...args) {
+    if (!inThrottle) {
+      fn.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
+}
+
+async function fetchQuoteWithRetry(retries, delay) {
+  try {
+    const res = await fetch("https://api.quotable.io/random");
+    if (!res.ok) throw new Error("API error");
+    const data = await res.json();
+    quoteBox.textContent = `"${data.content}" — ${data.author}`;
+  } catch (err) {
+    if (retries > 0) {
+      setTimeout(() => fetchQuoteWithRetry(retries - 1, delay * 2), delay);
+    } else {
+      quoteBox.textContent =
+        "Could not fetch a motivational quote. Try again later.";
+    }
+  }
+}

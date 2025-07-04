@@ -77,12 +77,27 @@ function throttle(fn, limit) {
   };
 }
 
+const API_KEY = "lDYRaMKMBcKoSdlc2S12iw==yLcXok31O4pxuqZu";
+
 async function fetchQuoteWithRetry(retries, delay) {
   try {
-    const res = await fetch("https://api.quotable.io/random");
+    const res = await fetch(
+      "https://api.api-ninjas.com/v1/quotes?category=inspirational",
+      {
+        headers: {
+          "X-Api-Key": API_KEY,
+        },
+      }
+    );
+
     if (!res.ok) throw new Error("API error");
+
     const data = await res.json();
-    quoteBox.textContent = `"${data.content}" — ${data.author}`;
+
+    if (data.length === 0) throw new Error("No quotes found");
+
+    // Show the first quote
+    quoteBox.textContent = `"${data[0].quote}" — ${data[0].author}`;
   } catch (err) {
     if (retries > 0) {
       setTimeout(() => fetchQuoteWithRetry(retries - 1, delay * 2), delay);

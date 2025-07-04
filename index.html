@@ -2,34 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Smart Reminder Dashboard</title>
+    <title>🌸 Smart Reminder Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>📅 Smart Reminder Dashboard</h1>
+    <h1>🌸 Smart Reminder Dashboard</h1>
 
     <form id="reminder-form">
-      <input
-        type="text"
-        id="task"
-        placeholder="Task (e.g., Take a break)"
-        required
-      />
+      <input type="text" id="task" placeholder="e.g. Drink water 💧" required />
       <input
         type="number"
         id="minutes"
-        placeholder="In how many minutes?"
+        placeholder="In minutes ⏱️"
         required
         min="1"
       />
-      <button type="submit">Add Reminder</button>
+      <button type="submit">➕ Add</button>
     </form>
 
-    <h2>Active Reminders</h2>
+    <h2>📋 Active Reminders</h2>
     <div id="reminder-list"></div>
 
     <h2>🧠 Motivation</h2>
-    <div id="quote"></div>
+    <div id="quote">No quotes yet... complete a reminder to get one!</div>
 
     <script src="script.js"></script>
   </body>

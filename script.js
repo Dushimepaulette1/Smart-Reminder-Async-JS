@@ -25,3 +25,21 @@ function handleAddReminder(e) {
   taskInput.value = "";
   minutesInput.value = "";
 }
+function renderReminder(reminder) {
+  const container = document.createElement("div");
+  container.className = "reminder";
+  container.id = `reminder-${reminder.id}`;
+
+  const countdown = document.createElement("span");
+  countdown.textContent = "⏳ Calculating...";
+
+  const cancelBtn = document.createElement("button");
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.onclick = () => cancelReminder(reminder.id);
+
+  container.innerHTML = `<strong>${reminder.task}</strong><br>`;
+  container.appendChild(countdown);
+  container.appendChild(document.createElement("br"));
+  container.appendChild(cancelBtn);
+
+  reminderList.appendChild(container);

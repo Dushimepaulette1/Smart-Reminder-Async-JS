@@ -43,3 +43,26 @@ function renderReminder(reminder) {
   container.appendChild(cancelBtn);
 
   reminderList.appendChild(container);
+  // Start countdown
+  reminder.intervalId = setInterval(() => {
+    const timeLeft = reminder.endTime - Date.now();
+    if (timeLeft <= 0) {
+      clearInterval(reminder.intervalId);
+      countdown.textContent = "⏰ Time’s up!";
+      fetchQuoteWithRetry(3, 1000);
+    } else {
+      const mins = Math.floor(timeLeft / 60000);
+      const secs = Math.floor((timeLeft % 60000) / 1000);
+      countdown.textContent = `⏳ ${mins}m ${secs}s left`;
+    }
+  }, 1000);
+}
+
+function cancelReminder(id) {
+  const index = reminders.findIndex((r) => r.id === id);
+  if (index !== -1) {
+    clearInterval(reminders[index].intervalId);
+    document.getElementById(`reminder-${id}`).remove();
+    reminders.splice(index, 1);
+  }
+}

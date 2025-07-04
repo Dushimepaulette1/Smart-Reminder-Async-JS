@@ -1,0 +1,20 @@
+body {
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 10px;
+  background: #f9f9f9;
+}
+h1 {
+  color: #333;
+}
+.reminder {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background: white;
+}
+button {
+  margin-top: 5px;
+}
